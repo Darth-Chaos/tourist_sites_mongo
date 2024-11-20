@@ -1,99 +1,188 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API MongoDB
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## Instalar
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+## Correr
 
 ```bash
 # development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Run tests
+## Endpoints
+
+### Create
+
+Utilizando el llamado ```/api/v1/superstitions/create``` se podrá crear un nuevo documento dentro de la base de datos.
+
+_Endpoint_
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+curl --location 'http://localhost:3000/sites' \
+--header 'Content-Type: application/json' \
+--data '{
+  "name": "Beautiful Beach Resort",
+  "description": "A wonderful resort with stunning beach views and world-class amenities.",
+  "category": {
+    "name": "Resort",
+    "description": "Luxury accommodations near the beach."
+  },
+  "location": {
+    "city": "Cartagena",
+    "latitude": 10.391048,
+    "longitude": -75.479425
+  },
+  "opening_hours": "Monday to Sunday: 8:00 AM - 10:00 PM",
+  "entry_fee": 50000,
+  "website": "https://beautifulbeachresort.com",
+  "photos": [
+    {
+      "photo_url": "https://example.com/photos/resort1.jpg",
+      "description": "A stunning view of the beach from the resort.",
+      "upload_date": "2024-11-01"
+    },
+    {
+      "photo_url": "https://example.com/photos/resort2.jpg",
+      "description": "Luxurious rooms with ocean views.",
+      "upload_date": "2024-11-02"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer_name": "John Doe",
+      "rating": 4.5,
+      "comment": "Amazing place with friendly staff and great amenities.",
+      "review_date": "2024-10-30"
+    },
+    {
+      "reviewer_name": "Jane Smith",
+      "rating": 5,
+      "comment": "The beach is pristine, and the food is incredible!",
+      "review_date": "2024-11-01"
+    }
+  ]
+}'
 ```
 
-## Deployment
+_Mongo_
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+```js
+db.collection.insertOne({
+  "name": "Beautiful Beach Resort",
+  "description": "A wonderful resort with stunning beach views and world-class amenities.",
+  "category": {
+    "name": "Resort",
+    "description": "Luxury accommodations near the beach."
+  },
+  "location": {
+    "city": "Cartagena",
+    "latitude": 10.391048,
+    "longitude": -75.479425
+  },
+  "opening_hours": "Monday to Sunday: 8:00 AM - 10:00 PM",
+  "entry_fee": 50000,
+  "website": "https://beautifulbeachresort.com",
+  "photos": [
+    {
+      "photo_url": "https://example.com/photos/resort1.jpg",
+      "description": "A stunning view of the beach from the resort.",
+      "upload_date": "2024-11-01"
+    },
+    {
+      "photo_url": "https://example.com/photos/resort2.jpg",
+      "description": "Luxurious rooms with ocean views.",
+      "upload_date": "2024-11-02"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer_name": "John Doe",
+      "rating": 4.5,
+      "comment": "Amazing place with friendly staff and great amenities.",
+      "review_date": "2024-10-30"
+    },
+    {
+      "reviewer_name": "Jane Smith",
+      "rating": 5,
+      "comment": "The beach is pristine, and the food is incredible!",
+      "review_date": "2024-11-01"
+    }
+  ]
+})
+```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Read
+
+### Singular
+
+_Endpoint_
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+curl --location 'http://localhost:3000/sites/673c0592139d68797315bb83'
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+_MongoDB_
 
-## Resources
+```js
+db.collection.findOne(
+  {},
+  { _id: 673c0592139d68797315bb83 }
+)
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Plural
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+_Endpoint_
 
-## Support
+```bash
+curl --location 'http://localhost:3000/sites'
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+_MongoDB_
 
-## Stay in touch
+```js
+db.collection.find()
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Updat
 
-## License
+_Endpoint_
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+curl --location 'http://localhost:3000/sites/update/673c0cd9be01486cc9fa6ef7' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Hermoso Resort en la Playa"
+}'
+```
+
+_MongoDB_
+
+```js
+db.collection.findOneAndUpdate(
+  { _id: 673c0cd9be01486cc9fa6ef7 },
+  { $set: {
+    "name": "Hermoso Resort en la Playa"
+  }}
+)
+```
+
+## Delete
+
+_Enndpoint_
+
+```bash
+curl --location --request POST 'http://localhost:3000/sites/delete/673c0cd9be01486cc9fa6ef7'
+```
+
+_MongoDB_
+
+```js
+db.collection.findOneAndDelete(
+  { _id: 673c0cd9be01486cc9fa6ef7 }
+)
+```
